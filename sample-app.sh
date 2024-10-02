@@ -1,6 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
+# Check if tempdir exists and remove it if it does
+if [ -d "tempdir" ]; then
+  rm -rf tempdir
+fi
+
 mkdir tempdir
 mkdir tempdir/templates
 mkdir tempdir/static
@@ -22,4 +27,4 @@ _EOF_
 cd tempdir || exit
 docker build -t sampleapp .
 docker run -t -d -p 5050:5050 --name samplerunning sampleapp
-docker ps -a 
+docker ps -a
